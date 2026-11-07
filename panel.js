@@ -138,6 +138,7 @@ function fleet() {
     const yTicks = Array.from({ length: upper / 50 + 1 }, (_, index) => index * 50);
     const { chart, x, y } = axes(target, [0, visibleFleet.length], [0, upper], xTicks, yTicks,
       "Motor de prueba, ordenado por límite inferior", "RUL [ciclos]", "RUL estimada y banda de incertidumbre de la flota");
+    chart.setAttribute("role", "group");
     const width = Math.min(32, (x(1) - x(0)) * 0.7);
     visibleFleet.forEach((row, index) => {
       const center = x(index + 0.5);
@@ -185,7 +186,7 @@ function engineHistory() {
   cards(byId("engine-cards"), [
     { label: "Motor", value: id, detail: `Ciclo ${end}` },
     { label: "RUL estimada", value: number(engine.p[index]), detail: "ciclos" },
-    { label: "Intervalo nominal", value: `${number(engine.l[index], 0)} – ${number(engine.u[index], 0)}`, detail: "ciclos" },
+    { label: "Intervalo nominal", value: `${number(engine.l[index])} – ${number(engine.u[index])}`, detail: "ciclos" },
     { label: "Reevaluar en", value: current.revisit, detail: "ciclos" },
   ]);
   const minHistory = dataset.study.min_history;
